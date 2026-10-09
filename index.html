@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Punit Security Services | Guards and access control</title>
+<script>
+  (function(){try{const s=JSON.parse(localStorage.getItem('pss1:theme'));const d=window.matchMedia('(prefers-color-scheme:dark)').matches;const t=s||(d?'dark':'light');document.documentElement.setAttribute('data-theme',t);document.documentElement.style.colorScheme=t}catch(e){}})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/navigation.css">
+  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body id="top">
+<!-- SECTION: sections/header.html -->
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top" aria-label="Punit Security Services, home">
+      <svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3l14 5v11c0 9-6 15-14 18C12 34 6 28 6 19V8z" fill="currentColor"/><circle cx="20" cy="17" r="4.6" fill="#F26A1B"/><path d="M12.5 28c2-4.500 4.700-6.500 7.500-6.500s5.500 2 7.500 6.500" fill="none" style="stroke:var(--bg)" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <span class="brand-t"><b>Punit</b><i>Security Services</i></span>
+    </a>
+    <nav class="links" aria-label="Main">
+      <a href="#services">Services</a>
+      <a href="#team">Our team</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-right">
+      <button class="theme-toggle" type="button" id="themeToggle" data-act="toggle-theme" aria-label="Toggle dark/light mode" title="Toggle dark/light mode">
+        <svg class="sun-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+      <div class="auth" id="authBox"></div>
+      <button class="btn btn-sm menu-btn" type="button" data-act="nav-toggle" aria-expanded="false">Menu</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- SECTION: sections/hero.html -->
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-rotator" aria-label="Slideshow of our security team and logo">
+    <img src="img/p0-11.png" alt="Punit Security Logo" class="rot-img rot-logo">
+    <img src="img/media_1790728894740.jpg" alt="Our team" class="rot-img">
+    <img src="img/media_1790728894743.png" alt="Guards saluting" class="rot-img">
+    <img src="img/media_1790728894771.jpg" alt="Security check" class="rot-img">
+    <img src="img/media_1790728894779.png" alt="Guards team" class="rot-img">
+  </div>
+  <div class="wrap hero-content">
+    <h1>Every gate watched.<br>Every shift covered.<br>For every type of security one solution Punit Security Services</h1>
+    <p class="lede">Punit Security Services provides trained guards, access control and a 24×7 control room for offices, factories, housing societies and events.</p>
+    <div class="cta">
+      <a class="btn btn-signal" href="#contact">Request a site survey</a>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: sections/facts.html -->
+<!-- Facts -->
+<section class="sec sec-alt" id="facts">
+  <div class="wrap">
+    <div class="sh">
+      <h2>Punit Security Services in numbers</h2>
+      <p>What a client gets when they hand us a gate, a building or a whole site.</p>
+    </div>
+    <ul class="ledger" id="ledger" data-io></ul>
+    <div class="shift">
+      <h3 id="shiftTitle">Three shifts, no gaps</h3>
+      <p class="muted" id="shiftNow"></p>
+      <div class="strip" id="strip" data-io role="img" aria-label="24 hour coverage split into morning, evening and night shifts"></div>
+      <div class="legend" id="legend"></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: sections/services.html -->
+<!-- Services -->
+<section class="sec" id="services">
+  <div class="wrap">
+    <div class="sh">
+      <h2>What we deliver</h2>
+      <p>Guards, cameras, locks and a control room from one provider. Pick a service to see what is included.</p>
+    </div>
+    <div class="px">
+      <div class="tabs" id="tabs" role="tablist" aria-orientation="horizontal" aria-label="Services"></div>
+      <div class="pp" id="ppanel" role="tabpanel" tabindex="0"></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: sections/team.html -->
+<!-- Team -->
+<section class="sec sec-alt" id="team">
+  <div class="wrap">
+    <div class="team-top">
+      <div class="intro">
+        <h2>The people behind every post</h2>
+        <p>Guards are background-verified and trained before their first posting. Supervisors, technicians and control room operators back them up on every shift.</p>
+      </div>
+      <div>
+        <div class="wf-h"><h3>Who works here</h3><span id="wfTotal"></span></div>
+        <ul class="wf" id="wf" data-io></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: sections/gallery.html -->
+<!-- Gallery -->
+<section class="sec" id="gallery">
+  <div class="wrap">
+    <div class="sh">
+      <h2>See us in action</h2>
+      <p>Our team on the ground, securing sites, operating control rooms, and protecting high-profile clients.</p>
+    </div>
+    <div class="gallery-grid" id="galleryGrid">
+      <div class="gallery-item" data-act="view-photo" tabindex="0" role="button" aria-label="View photo: Manned Gate Operations">
+        <img src="img/media_1790728894740.jpg" alt="Manned Gate Operations" loading="lazy">
+        <div class="gallery-zoom-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+        </div>
+        <div class="gallery-overlay">
+          <span class="gallery-overlay-badge">On-Duty Guard</span>
+          <h3>Manned Gate Operations</h3>
+          <p>Trained and vigilant officer monitoring facility perimeter and visitor credentials.</p>
+        </div>
+      </div>
+      <div class="gallery-item" data-act="view-photo" tabindex="0" role="button" aria-label="View photo: Guard Drill & Parade">
+        <img src="img/media_1790728894743.png" alt="Guard Drill & Parade" loading="lazy">
+        <div class="gallery-zoom-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+        </div>
+        <div class="gallery-overlay">
+          <span class="gallery-overlay-badge">Discipline</span>
+          <h3>Guard Drill & Parade</h3>
+          <p>Ex-servicemen led ceremonial protocol, physical fitness, and morning roll call.</p>
+        </div>
+      </div>
+      <div class="gallery-item" data-act="view-photo" tabindex="0" role="button" aria-label="View photo: Access Checkpoint Inspection">
+        <img src="img/media_1790728894771.jpg" alt="Access Checkpoint Inspection" loading="lazy">
+        <div class="gallery-zoom-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+        </div>
+        <div class="gallery-overlay">
+          <span class="gallery-overlay-badge">Access Control</span>
+          <h3>Access Checkpoint Inspection</h3>
+          <p>Strict entry register, material outward check, and biometric pass validation.</p>
+        </div>
+      </div>
+      <div class="gallery-item" data-act="view-photo" tabindex="0" role="button" aria-label="View photo: Rapid Deployment Squad">
+        <img src="img/media_1790728894779.png" alt="Rapid Deployment Squad" loading="lazy">
+        <div class="gallery-zoom-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+        </div>
+        <div class="gallery-overlay">
+          <span class="gallery-overlay-badge">Team Security</span>
+          <h3>Rapid Deployment Squad</h3>
+          <p>Fully equipped team ready for 24/7 site supervision and shift handovers.</p>
+        </div>
+      </div>
+      <div class="gallery-item" data-act="view-photo" tabindex="0" role="button" aria-label="View photo: VIP Event Protection">
+        <img src="img/p2-25.png" alt="VIP Event Protection" loading="lazy">
+        <div class="gallery-zoom-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+        </div>
+        <div class="gallery-overlay">
+          <span class="gallery-overlay-badge">VIP Escort</span>
+          <h3>VIP Event Protection</h3>
+          <p>Discrete personal protection, perimeter containment, and executive protocol.</p>
+        </div>
+      </div>
+      <div class="gallery-item" data-act="view-photo" tabindex="0" role="button" aria-label="View photo: Tactical Training & Drills">
+        <img src="img/p3-33.png" alt="Tactical Training & Drills" loading="lazy">
+        <div class="gallery-zoom-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+        </div>
+        <div class="gallery-overlay">
+          <span class="gallery-overlay-badge">Training Camp</span>
+          <h3>Tactical Training & Drills</h3>
+          <p>Regular refresher training on fire safety, emergency evacuation, and dispute de-escalation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION: sections/contact.html -->
+<!-- Contact -->
+<section class="sec sec-alt" id="contact">
+  <div class="wrap contact">
+    <div>
+      <h2>Request a site survey</h2>
+      <p class="muted" style="margin-top:1.1rem;max-width:30rem">Tell us about the site. We will visit, note the entry points and blind spots, and send a written plan with a quote.</p>
+      
+      <div style="margin-top:2rem; padding: 1.25rem; background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--signal); border-radius: 4px; max-width: 30rem;">
+        <h4 style="font:700 1.1rem var(--body); margin-bottom:.5rem;">Tenders & Empanelment</h4>
+        <p class="muted" style="font-size: .95rem; margin-bottom: 0; line-height: 1.5;">We invite companies and government departments to include our licensed agency in their vendor registration and tender processes. We fully comply with all eligibility criteria, EMD terms, and statutory laws.</p>
+      </div>
+
+      <dl id="contactDl"></dl>
+    </div>
+    <form id="enqForm" data-form="enquiry" novalidate>
+      <div class="row2">
+        <div class="field"><label for="c-name">Your name</label><input id="c-name" name="fullName" autocomplete="name" required></div>
+        <div class="field"><label for="c-phone">Phone number</label><input id="c-phone" name="phone" inputmode="tel" autocomplete="tel" required></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="c-site">Type of site</label>
+          <select id="c-site" name="siteType"><option>Office</option><option>Factory or warehouse</option><option>Housing society</option><option>School or college</option><option>Shop or showroom</option><option>Event</option><option>Other</option></select></div>
+        <div class="field"><label for="c-service">Service you need</label><select id="c-service" name="service"></select></div>
+      </div>
+      <div class="field"><label for="c-msg">About the site</label><textarea id="c-msg" name="message" rows="4" placeholder="Size of the site, number of gates, current security"></textarea></div>
+      <p class="err" role="alert"></p>
+      <button class="btn btn-signal" type="submit">Request site survey</button>
+    </form>
+  </div>
+</section>
+</main>
+
+<!-- SECTION: sections/footer.html -->
+<footer class="foot">
+  <div class="wrap"><b>Punit Security Services</b><span>&copy; 2026 Punit Security Services. All rights reserved.</span></div>
+</footer>
+
+<!-- SECTION: sections/dialogs.html -->
+<dialog id="dlg" aria-labelledby="dlgTitle">
+  <div class="dlg-head"><h2 id="dlgTitle"></h2><button class="btn btn-sm" type="button" data-act="dlg-close">Close</button></div>
+  <div class="dlg-body" id="dlgBody"></div>
+</dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="js/01-config-data.js"></script>
+<script src="js/02-core-utils.js"></script>
+<script src="js/03-storage-state.js"></script>
+<script src="js/04-seed-data.js"></script>
+<script src="js/05-dialog-forms-ui.js"></script>
+<script src="js/06-auth.js"></script>
+<script src="js/07-render-static.js"></script>
+<script src="js/08-render-products.js"></script>
+<script src="js/09-render-team.js"></script>
+<script src="js/11-dashboard-views.js"></script>
+<script src="js/12-actions-events.js"></script>
+<script src="js/13-form-handlers.js"></script>
+<script src="js/14-motion-init.js"></script>
+</body>
+</html>
