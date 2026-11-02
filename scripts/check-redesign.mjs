@@ -11,14 +11,16 @@ const required = [
   ["page title", /<title>[^<]+<\/title>/i],
   ["main landmark", /<main\b[\s\S]*?<\/main>/i],
   ["services section", /id="services"/],
-  ["approach section", /id="approach"/],
-  ["credentials section", /id="credentials"/],
+  ["about section", /id="about"/],
+  ["capabilities section", /id="capabilities"/],
   ["contact section", /id="contact"/],
   ["mobile navigation", /id="mobilePanel"/],
   ["accessible menu state", /aria-expanded="false"/],
   ["enquiry form", /id="enquiryForm"/],
   ["reduced motion support", /prefers-reduced-motion:\s*reduce/],
   ["email handoff", /mailto:pss122005@gmail\.com/],
+  ["original team photography", /alt="Punit Security Services team"/],
+  ["service photography", /class="service-image"/],
 ];
 
 for (const [label, pattern] of required) {
