@@ -438,7 +438,7 @@ dialog::backdrop{background:rgba(6,14,28,.62)}
 
 </style>
 </head>
-<body id="top">
+<body id="top"><div class="guard-cursor"></div>
 <!-- SECTION: sections/header.html -->
 <header class="nav" id="nav">
   <div class="wrap nav-in">
@@ -675,6 +675,7 @@ dialog::backdrop{background:rgba(6,14,28,.62)}
 window.CONFIG = {
   contact: {
     phone: '9145314000',
+    officePhone : '7497897879', 
     email: 'pss122005@gmail.com',
     owner: 'Ex Serviceman Surender Singh & Punit Rana',
     address: 'Main Bus Stand, VPO Chirya, District & Tehsil Charkhi Dadri, Haryana – 127022',
@@ -898,7 +899,7 @@ function renderWorkforce() {
 }
 function renderContact() {
   const c = CONFIG.contact;
-  $('#contactDl').innerHTML = `<div><dt>Owner</dt><dd>${esc(c.owner)}</dd></div><div><dt>Phone</dt><dd>${esc(c.phone)}</dd></div><div><dt>Email</dt><dd>${esc(c.email)}</dd></div><div><dt>Office</dt><dd>${esc(c.address)}</dd></div><div><dt>License</dt><dd>${esc(c.license)}<br>Valid: ${esc(c.validity)}</dd></div><div><dt>Hours</dt><dd>${esc(c.hours)}</dd></div>`;
+  $('#contactDl').innerHTML = `<div><dt>Owner</dt><dd>${esc(c.owner)}</dd></div><div><dt>Phone</dt><dd>${esc(c.phone)}</dd></div><div><dt>Office Helpline</dt><dd><a href="tel:${esc(c.officePhone)}" style="color:var(--ink-2);text-decoration:none">${esc(c.officePhone)}</a></dd></div><div><dt>Email</dt><dd>${esc(c.email)}</dd></div><div><dt>Office</dt><dd>${esc(c.address)}</dd></div><div><dt>License</dt><dd>${esc(c.license)}<br>Valid: ${esc(c.validity)}</dd></div><div><dt>Hours</dt><dd>${esc(c.hours)}</dd></div>`;
   $('#c-service').innerHTML = '<option>Not sure yet</option><option>Vendor Registration / Empanelment</option>' + PRODUCTS.map(p => `<option>${esc(p.name)}</option>`).join('');
 }
 
