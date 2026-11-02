@@ -98,8 +98,11 @@
 *,*::before,*::after{box-sizing:border-box}
 [hidden]{display:none!important}
 html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 80px)}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 var(--body);-webkit-font-smoothing:antialiased;transition:background-color .3s ease,color .3s ease}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 var(--body);-webkit-font-smoothing:antialiased;transition:background-color .3s ease,color .3s ease;cursor:none;}
 img,svg{max-width:100%}
+
+/* Guard cursor */
+.guard-cursor{position:fixed;width:32px;height:32px;pointer-events:none;transform:translate(-50%,-50%);z-index:9999;background:url('../img/guard_cursor.jpg') center/contain no-repeat;}
 img{transition:transform .4s cubic-bezier(.2,.8,.2,1),filter .4s ease}
 a{color:inherit}
 h1,h2,h3,h4,p{margin:0}
@@ -404,6 +407,32 @@ dialog::backdrop{background:rgba(6,14,28,.62)}
 .toast{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom,0px));transform:translate(-50%,16px);background:var(--navy);color:var(--on-navy);padding:.7rem 1.15rem;border-radius:3px;border:1px solid rgba(255,255,255,.2);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:100;font-weight:600;font-size:.95rem}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 
+/* clients & partners */
+.client-sec-badge{display:inline-block;font:700 .82rem var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--signal);margin-bottom:.4rem}
+.clients-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:2rem}
+.client-card{background:var(--surface);border:1.5px solid var(--line);border-top:4px solid var(--signal);border-radius:12px;padding:clamp(20px,3.5vw,30px);box-shadow:var(--card-shadow);transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s cubic-bezier(.2,.8,.2,1),border-color .3s ease;position:relative;display:flex;flex-direction:column}
+.client-card:hover{transform:translateY(-6px);box-shadow:var(--card-shadow-hover);border-color:var(--signal)}
+.client-card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:1.15rem}
+.client-icon-badge{width:48px;height:48px;border-radius:10px;background:var(--surface-2);color:var(--signal);display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid var(--line)}
+.client-pills{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:flex-end}
+.client-pill{font:700 .75rem/1.2 var(--body);letter-spacing:.04em;text-transform:uppercase;padding:.35rem .65rem;border-radius:4px}
+.client-pill-verified{background:rgba(27,138,90,.12);color:var(--ok);border:1px solid rgba(27,138,90,.3);display:inline-flex;align-items:center;gap:.35rem}
+.client-pill-cat{background:var(--surface-2);color:var(--ink-2);border:1px solid var(--line)}
+.client-card-body{display:flex;flex-direction:column;flex:1}
+.client-title{font:800 clamp(1.55rem,2.8vw,2.05rem)/1.12 var(--display);color:var(--ink);margin:0 0 .35rem;letter-spacing:.005em}
+.client-type-desc{color:var(--signal-text);font-weight:600;font-size:.94rem;margin-bottom:.65rem}
+.client-proprietor-tag{display:inline-block;padding:.35rem .75rem;background:var(--surface-2);border:1px solid var(--line);border-radius:4px;font-size:.88rem;color:var(--ink);margin-bottom:1rem;width:fit-content}
+.client-proprietor-tag strong{color:var(--ink);font-weight:700}
+.client-scope{font-size:.96rem;color:var(--ink-2);line-height:1.55;margin-bottom:1.25rem}
+.client-details-table{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:.85rem 1.1rem;display:grid;gap:.55rem;margin-bottom:1.25rem;font-size:.91rem}
+.client-row{display:grid;grid-template-columns:105px 1fr;gap:.75rem;align-items:baseline}
+.client-lbl{font-weight:700;color:var(--ink);font-size:.82rem;text-transform:uppercase;letter-spacing:.04em}
+.client-val{color:var(--ink-2);word-break:break-word}
+.client-code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-weight:600;color:var(--ink);letter-spacing:.02em}
+.client-tags-row{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:auto;padding-top:.5rem}
+.client-tag{font:600 .78rem var(--body);color:var(--ink-2);background:var(--surface-2);border:1px solid var(--line);padding:.25rem .55rem;border-radius:3px}
+
+
 
 /* === css/responsive.css === */
 /* ---------- Responsive ---------- */
@@ -428,6 +457,8 @@ dialog::backdrop{background:rgba(6,14,28,.62)}
   .row2{grid-template-columns:1fr}
   .job-head{grid-template-columns:1fr}
   .gallery-grid{grid-template-columns:1fr}
+  .clients-grid{grid-template-columns:1fr}
+  .client-row{grid-template-columns:1fr;gap:.15rem}
   .auth .btn-quiet{display:none}
   .brand-t i{display:none}
 }
@@ -438,7 +469,7 @@ dialog::backdrop{background:rgba(6,14,28,.62)}
 
 </style>
 </head>
-<body id="top"><div class="guard-cursor"></div>
+<body id="top">
 <!-- SECTION: sections/header.html -->
 <header class="nav" id="nav">
   <div class="wrap nav-in">
@@ -450,6 +481,7 @@ dialog::backdrop{background:rgba(6,14,28,.62)}
       <a href="#services">Services</a>
       <a href="#team">Our team</a>
       <a href="#gallery">Gallery</a>
+      <a href="#clients">Clients</a>
       <a href="#contact">Contact</a>
     </nav>
     <div class="nav-right">
@@ -624,6 +656,20 @@ dialog::backdrop{background:rgba(6,14,28,.62)}
   </div>
 </section>
 
+<!-- SECTION: sections/clients.html -->
+<!-- Clients & Partners -->
+<section class="sec" id="clients">
+  <div class="wrap">
+    <div class="sh">
+      <div>
+        <span class="client-sec-badge">Verified Deployments</span>
+        <h2>Our Trusted Clients</h2>
+      </div>
+      <p>Providing high-discipline guarding, round-the-clock perimeter surveillance, and heavy equipment protection for premier infrastructure and civil contracting firms.</p>
+    </div>
+    <div class="clients-grid" id="clientsGrid"></div>
+  </div>
+</section>
 
 <!-- SECTION: sections/contact.html -->
 <!-- Contact -->
@@ -675,7 +721,8 @@ dialog::backdrop{background:rgba(6,14,28,.62)}
 window.CONFIG = {
   contact: {
     phone: '9145314000',
-    officePhone : '7497897879', 
+    officePhone: '7497897879',
+    OfficePhone: '7497897879',
     email: 'pss122005@gmail.com',
     owner: 'Ex Serviceman Surender Singh & Punit Rana',
     address: 'Main Bus Stand, VPO Chirya, District & Tehsil Charkhi Dadri, Haryana – 127022',
@@ -685,18 +732,42 @@ window.CONFIG = {
   },
   facts: [
     { n: 17,  suffix: '+',  text: 'years of guarding offices as an Ex-service man' },
-    { n: 3, suffix: '+',  text: 'sites protected every night.' },
+    { n: 14, suffix: '+',  text: 'sites protected every night.' },
     { n: 'STAFF', suffix: '', text: 'people on the team, from guards to control room operators.' },
     { n: 24,  suffix: '×7', text: 'control room, staffed in three shifts with a handover at each change.' },
     { n: 100,  suffix: '%',  text: 'of clients renew their contract every year.' }
   ],
   workforce: [
-    ['Security guards', 20],
-    ['Ex-servicemen guards', 2],
-    ['Supervisors and field officers', 3],
+    ['Security guards',20 ],
+    ['Ex-servicemen guards', 0],
+    ['Supervisors and field officers', 8],
 
-    ['Control room operators', 6],
-    ['Trainers and office staff', 3]
+    ['Control room operators', 2],
+    ['Trainers and office staff', 4]
+  ],
+  clients: [
+    {
+      name: 'R.S. Road Construction And Road Safety',
+      type: 'Infrastructure & Road Safety',
+      constitution: 'Registered Enterprise',
+      address: '687, Chirya, Bhiwani, Haryana',
+      state: 'Haryana (State Code: 06)',
+      gstin: '06DFYPK4432Q1ZJ',
+      pan: 'DFYPK4432Q',
+      scope: 'Highway construction site security, heavy machinery vigilance, raw material protection, and 24×7 perimeter traffic and road safety surveillance.',
+      tags: ['Highway & Road Work', 'Heavy Machinery Security', 'Material Protection', '24×7 Sentry Coverage']
+    },
+    {
+      name: 'M/S Manoj Kumar Contractor',
+      type: 'Civil Works & Government Contractor',
+      constitution: 'Proprietorship',
+      proprietor: 'Manoj Kumar',
+      address: 'Village-Dinod, Near Radha Swami Ashram, Dinod, Bhiwani, Haryana – 127111',
+      state: 'Haryana',
+      gstin: '06CTFPK3961C1ZV',
+      scope: 'Active civil construction site guarding, inward/outward material register verification, building material protection, and supervisor patrol rounds.',
+      tags: ['Proprietorship', 'Civil Construction Sites', 'Access Control & Registers', 'Supervised Shifts']
+    }
   ],
   demoAdmin: { email: 'admin@punit.demo', password: 'Punit@123' }
 };
@@ -899,9 +970,66 @@ function renderWorkforce() {
 }
 function renderContact() {
   const c = CONFIG.contact;
-  $('#contactDl').innerHTML = `<div><dt>Owner</dt><dd>${esc(c.owner)}</dd></div><div><dt>Phone</dt><dd>${esc(c.phone)}</dd></div><div><dt>Office Helpline</dt><dd><a href="tel:${esc(c.officePhone)}" style="color:var(--ink-2);text-decoration:none">${esc(c.officePhone)}</a></dd></div><div><dt>Email</dt><dd>${esc(c.email)}</dd></div><div><dt>Office</dt><dd>${esc(c.address)}</dd></div><div><dt>License</dt><dd>${esc(c.license)}<br>Valid: ${esc(c.validity)}</dd></div><div><dt>Hours</dt><dd>${esc(c.hours)}</dd></div>`;
+  const offTel = c.officePhone || c.OfficePhone || '';
+  $('#contactDl').innerHTML = `<div><dt>Owner</dt><dd>${esc(c.owner)}</dd></div><div><dt>Phone</dt><dd>${esc(c.phone)}</dd></div>${offTel ? `<div><dt>Office Helpline</dt><dd><a href="tel:${esc(offTel)}" style="color:var(--ink-2);text-decoration:none">${esc(offTel)}</a></dd></div>` : ''}<div><dt>Email</dt><dd>${esc(c.email)}</dd></div><div><dt>Office</dt><dd>${esc(c.address)}</dd></div><div><dt>License</dt><dd>${esc(c.license)}<br>Valid: ${esc(c.validity)}</dd></div><div><dt>Hours</dt><dd>${esc(c.hours)}</dd></div>`;
   $('#c-service').innerHTML = '<option>Not sure yet</option><option>Vendor Registration / Empanelment</option>' + PRODUCTS.map(p => `<option>${esc(p.name)}</option>`).join('');
 }
+
+function renderClients() {
+  const grid = $('#clientsGrid');
+  if (!grid || !CONFIG.clients) return;
+  grid.innerHTML = CONFIG.clients.map((c, i) => `
+    <article class="client-card" style="--i:${i}">
+      <div class="client-card-top">
+        <div class="client-icon-badge">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 21h18M5 21V7l8-4v18M13 21V11l6 3v7M9 9h1M9 13h1M9 17h1M17 17h1"/>
+          </svg>
+        </div>
+        <div class="client-pills">
+          <span class="client-pill client-pill-verified">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            Active Site Security
+          </span>
+          <span class="client-pill client-pill-cat">${esc(c.constitution || c.type)}</span>
+        </div>
+      </div>
+
+      <div class="client-card-body">
+        <h3 class="client-title">${esc(c.name)}</h3>
+        <p class="client-type-desc">${esc(c.type)}</p>
+        ${c.proprietor ? `<div class="client-proprietor-tag"><strong>Constitution:</strong> Proprietorship &bull; Prop. ${esc(c.proprietor)}</div>` : ''}
+
+        <p class="client-scope">${esc(c.scope)}</p>
+
+        <div class="client-details-table">
+          <div class="client-row">
+            <span class="client-lbl">Location</span>
+            <span class="client-val">${esc(c.address)}</span>
+          </div>
+          <div class="client-row">
+            <span class="client-lbl">GSTIN</span>
+            <span class="client-val client-code">${esc(c.gstin)}</span>
+          </div>
+          ${c.pan ? `
+          <div class="client-row">
+            <span class="client-lbl">PAN</span>
+            <span class="client-val client-code">${esc(c.pan)}</span>
+          </div>` : ''}
+          <div class="client-row">
+            <span class="client-lbl">State / Area</span>
+            <span class="client-val">${esc(c.state)}</span>
+          </div>
+        </div>
+
+        <div class="client-tags-row">
+          ${(c.tags || []).map(t => `<span class="client-tag">${esc(t)}</span>`).join('')}
+        </div>
+      </div>
+    </article>
+  `).join('');
+}
+
 
 
 /* === js/08-render-products.js === */
@@ -1109,14 +1237,28 @@ function initReveal() {
   }), { threshold: .35 });
   $$('[data-io]').forEach(el => io.observe(el));
 }
+
+function initGuardCursor() {
+  const cursor = document.querySelector('.guard-cursor');
+  if (!cursor) return;
+  const isCoarse = window.matchMedia('(pointer: coarse)').matches;
+  if (isCoarse) {
+    cursor.style.display = 'none';
+    return;
+  }
+  document.addEventListener('mousemove', e => {
+    cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+  });
+}
 /* ---------------- init ---------------- */
 async function init() {
   initTheme();
-  renderFacts(); renderShift(); renderWorkforce(); renderContact(); buildTabs(); initReveal();
+  renderFacts(); renderShift(); renderWorkforce(); renderContact(); renderClients(); buildTabs(); initReveal();
   setInterval(renderShift, 60000);
   await seed();
   renderAll();
   document.addEventListener('click', e => { if (e.target.closest('.links a')) { $('#nav').classList.remove('open'); $('.menu-btn').setAttribute('aria-expanded', 'false'); } });
+  initGuardCursor();
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
     if (store.get('theme', null) === null) {
       applyTheme(e.matches ? 'dark' : 'light');
