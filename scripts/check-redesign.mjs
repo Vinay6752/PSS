@@ -2,31 +2,37 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import assert from "node:assert/strict";
 
-const file = resolve("redesign/index.html");
-const html = readFileSync(file, "utf8");
+const html = readFileSync(resolve("redesign/index.html"), "utf8");
 
 const required = [
   ["HTML5 doctype", /^<!doctype html>/i],
   ["responsive viewport", /<meta[^>]+name="viewport"/i],
   ["page title", /<title>[^<]+<\/title>/i],
   ["main landmark", /<main\b[\s\S]*?<\/main>/i],
-  ["services section", /id="services"/],
   ["about section", /id="about"/],
-  ["capabilities section", /id="capabilities"/],
+  ["services section", /id="services"/],
+  ["industries section", /id="industries"/],
+  ["why choose us section", /id="why"/],
+  ["gallery section", /id="gallery"/],
+  ["how we work section", /id="process"/],
   ["contact section", /id="contact"/],
-  ["mobile navigation", /id="mobilePanel"/],
+  ["mobile navigation", /id="mobileNav"/],
   ["accessible menu state", /aria-expanded="false"/],
-  ["enquiry form", /id="enquiryForm"/],
-  ["reduced motion support", /prefers-reduced-motion:\s*reduce/],
-  ["email handoff", /mailto:pss122005@gmail\.com/],
   ["original team photography", /alt="Punit Security Services team"/],
-  ["service photography", /class="service-image"/],
+  ["reduced motion support", /prefers-reduced-motion:\s*reduce/],
+  ["correct email contact", /mailto:pss122005@gmail\.com/],
+  ["correct control room contact", /tel:\+919145314000/],
+  ["correct second phone contact", /tel:\+917497897879/],
+  ["licence reference", /PSAL\/L\/58\/HR\/2026\/PSP\/2\/1829/],
+  ["24-hour control room", /Control room: 24 hours/],
 ];
 
 for (const [label, pattern] of required) {
   assert.match(html, pattern, `Missing or invalid: ${label}`);
   console.log(`✓ ${label}`);
 }
+
+assert.doesNotMatch(html, /id="enquiryForm"|<form\b/i, "This design should not include an enquiry form");
 
 const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1]);
 const duplicates = ids.filter((id, index) => ids.indexOf(id) !== index);
@@ -44,4 +50,4 @@ const sectionOpen = (html.match(/<section\b/gi) ?? []).length;
 const sectionClose = (html.match(/<\/section>/gi) ?? []).length;
 assert.equal(sectionOpen, sectionClose, "Unbalanced section tags");
 
-console.log("\nRedesign preview smoke checks passed.");
+console.log("\nPSS reference redesign smoke checks passed.");
