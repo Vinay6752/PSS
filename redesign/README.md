@@ -1,24 +1,25 @@
-# PSS redesign preview
+# Punit Security Services redesign preview
 
-This folder contains an isolated, static redesign preview for Punit Security Services.
+The preview is a full rebuild of the previous redesign, following the dark navy, neon-lime and photographic design reference supplied in the conversation.
 
 ## Preview
-Open `redesign/index.html` in a browser, or serve the repository root with any static HTTP server and visit `/redesign/`.
+Open `redesign/index.html` in a browser, or serve the repository root with a static HTTP server and visit `/redesign/`.
 
-## Design direction
-- Bold black, white and electric-blue visual identity inspired by contemporary security-service landing pages.
-- Large typographic hero, photographic composition, high-contrast service cards, capability grid and prominent contact panel.
-- Uses the original site's embedded team and operational photographs. Images are embedded in the HTML, so the preview has no external image or font requests.
-- Responsive desktop, tablet and mobile layouts with accessible navigation, labelled form controls, keyboard focus states and reduced-motion support.
-- No framework, build step, or runtime dependency.
+## Design system and page structure
+- Deep navy background, layered indigo panels, bright lime accents, rounded cards and compact typography.
+- Centered photographic hero, about/leadership section, service cards, industry grid, credibility bento, image gallery, three-step process, contact CTA and multi-column footer.
+- Responsive desktop, tablet and mobile layouts, accessible mobile navigation, visible keyboard focus and reduced-motion support.
+- Original embedded photographs from the existing PSS website. Images are embedded in the HTML, so the preview does not require external image hosting or font requests.
+- No enquiry form. Contact actions use the verified PSS telephone numbers and email address directly.
 
-## Implementation notes
-- The enquiry form opens the visitor's email client with a prefilled message. It does not submit to a backend or store data.
-- Company details and service descriptions are based on the existing site. No fabricated testimonials, client logos, workforce totals, or contract statistics were added.
-- The preview does not replace the current production `index.html`; review it before deciding whether to promote it.
+## Content accuracy
+- Company details, licence number and validity, service descriptions, owner names, address and contact information are taken from the existing website configuration.
+- The existing source describes 17+ years of guarding experience as an ex-serviceman. The redesign keeps that wording scoped to individual experience, not company age.
+- The old site's zero/placeholder site, staffing and renewal figures are not presented as achievements.
+- No invented client counts, guard totals, testimonials, satisfaction percentages, blog posts or client logos are used.
 
 ## Before production
-1. Confirm all company details, phone numbers, licence wording, validity dates and the use of the embedded photographs.
-2. Connect the enquiry form to a server-side endpoint with validation, spam protection and an appropriate privacy notice.
-3. Test on current mobile and desktop browsers, including keyboard-only navigation.
-4. Review security and deployment configuration for the existing admin functionality separately.
+1. Confirm all contact details, licence wording and validity dates.
+2. Confirm permission to use the embedded staff and operational photographs.
+3. Test the page on current mobile and desktop browsers.
+4. Review and separately address the existing site's admin/security implementation before any production replacement.
