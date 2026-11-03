@@ -1,0 +1,26 @@
+name: Redesign preview checks
+
+on:
+  pull_request:
+    paths:
+      - "redesign/**"
+      - ".github/workflows/redesign-check.yml"
+  push:
+    branches:
+      - "redesign/responsive-refresh"
+    paths:
+      - "redesign/**"
+      - ".github/workflows/redesign-check.yml"
+
+jobs:
+  smoke-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate redesign preview
+        run: node scripts/check-redesign.mjs

@@ -1,0 +1,67 @@
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
+import assert from "node:assert/strict";
+
+const html = readFileSync(resolve("redesign/index.html"), "utf8");
+
+const required = [
+  ["HTML5 doctype", /^<!doctype html>/i],
+  ["responsive viewport", /<meta[^>]+name="viewport"/i],
+  ["page title", /<title>[^<]+<\/title>/i],
+  ["main landmark", /<main\b[\s\S]*?<\/main>/i],
+  ["about section", /id="about"/],
+  ["services section", /id="services"/],
+  ["24-hour shift coverage section", /id="shift-coverage"/],
+  ["morning shift timing", /06:00 – 14:00/],
+  ["evening shift timing", /14:00 – 22:00/],
+  ["night shift timing", /22:00 – 06:00/],
+  ["shift handover note", /Continuous handover/],
+  ["industries section", /id="industries"/],
+  ["why choose us section", /id="why"/],
+  ["gallery section", /id="gallery"/],
+  ["looping gallery track", /class="gallery-track"/],
+  ["three repeated gallery sets", /class="gallery-set"/],
+  ["seamless gallery animation", /@keyframes pss-gallery-loop/],
+  ["gallery pauses on hover", /animation-play-state:paused/],
+  ["gallery respects reduced motion", /@media\(prefers-reduced-motion:\s*reduce\)[\s\S]*?gallery-track\{animation:none/],
+  ["improved responsive section spacing", /\.section\{padding:clamp\(76px,8\.5vw,112px\) 0\}/],
+  ["five original gallery photographs", /class="gallery-item"/],
+  ["editorial staggered gallery layout", /grid-template-columns:\.72fr \.92fr 1\.72fr \.92fr \.72fr/],
+  ["mobile gallery scroll snapping", /scroll-snap-type:x mandatory/],
+  ["how we work section", /id="process"/],
+  ["contact section", /id="contact"/],
+  ["mobile navigation", /id="mobileNav"/],
+  ["accessible menu state", /aria-expanded="false"/],
+  ["original team photography", /alt="Punit Security Services team"/],
+  ["reduced motion support", /prefers-reduced-motion:\s*reduce/],
+  ["correct email contact", /mailto:pss122005@gmail\.com/],
+  ["correct control room contact", /tel:\+919145314000/],
+  ["correct second phone contact", /tel:\+917497897879/],
+  ["licence reference", /PSAL\/L\/58\/HR\/2026\/PSP\/2\/1829/],
+  ["24-hour control room", /Control room: 24 hours/],
+];
+
+for (const [label, pattern] of required) {
+  assert.match(html, pattern, `Missing or invalid: ${label}`);
+  console.log(`✓ ${label}`);
+}
+
+assert.doesNotMatch(html, /id="enquiryForm"|<form\b/i, "This design should not include an enquiry form");
+
+const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1]);
+const duplicates = ids.filter((id, index) => ids.indexOf(id) !== index);
+assert.deepEqual([...new Set(duplicates)], [], "Duplicate HTML IDs found");
+
+const anchors = [...html.matchAll(/href="#([^"]+)"/g)].map((match) => match[1]);
+const missingAnchors = anchors.filter((id) => !ids.includes(id));
+assert.deepEqual([...new Set(missingAnchors)], [], "Broken in-page anchor links found");
+
+const scriptOpen = (html.match(/<script\b/gi) ?? []).length;
+const scriptClose = (html.match(/<\/script>/gi) ?? []).length;
+assert.equal(scriptOpen, scriptClose, "Unbalanced script tags");
+
+const sectionOpen = (html.match(/<section\b/gi) ?? []).length;
+const sectionClose = (html.match(/<\/section>/gi) ?? []).length;
+assert.equal(sectionOpen, sectionClose, "Unbalanced section tags");
+
+console.log("\nPSS reference redesign smoke checks passed.");
